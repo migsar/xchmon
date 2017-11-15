@@ -9,6 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "websocket": "^1.0.25"
+    "chalk": "^2.3.0",
+    "faye-websocket": "^0.11.1",
+    "websocket": "^1.0.25",
+    "winston": "^3.0.0-rc1"
   }
 }
