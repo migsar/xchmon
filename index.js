@@ -11,5 +11,5 @@ app.configureLogger({
   level: process.env['LOG_LEVEL'] || 'prod',
   file: join(__dirname, logDir, logFile)
 });
-app.addConsumer(bitso);
+app.addProvider(bitso);
 app.start();

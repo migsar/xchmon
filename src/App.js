@@ -1,17 +1,22 @@
 const winston = require('winston');
+const chalk = require('chalk');
 const Context = require('./Context');
+const Provider = require('./Provider');
 
 const state = Symbol('state');
 
 class App{
   constructor(){
-    this[state] = {};
+    this[state] = {
+      providers: [],
+      consumers: []
+    };
     this.configureContext();
   }
 
   configureLogger(options) {
     // todo: logs directory must exist or log is not created and no message is displayed
-    this[state].logger = winston.createLogger({
+    const logger = winston.createLogger({
       level: options.level,
       transports: [
         new winston.transports.Console(),
@@ -20,18 +25,21 @@ class App{
         })
       ]
     });
+
+    this[state].context.setVar('logger', logger);
   }
 
   configureContext() {
     this[state].context = new Context;
   }
 
-  addConsumer() {
-
+  addProvider(providerOptions) {
+    this[state].providers.push(new Provider(providerOptions, this[state].context));
   }
 
   start() {
-    this[state].logger.info('Xchmon started...');
+    // todo: use logger
+    console.log(chalk.blue('Xchmon started...'));
   }
 }
 

@@ -1,18 +1,30 @@
 {
   "name": "Bitso",
-  "address": "ws://ws.bitso.com/",
-  "channels": [
-    {
-      "name": "trades",
-      "responseDescription": {
-        "i": "id",
-        "a": "amount",
-        "r": "rate",
-        "v": 	"value",
-        "t": 	"transaction",
-        "mo": "makerOrderID",
-        "to": "takerOrderID"
-      }
+  "books": [
+    "btc_mxn",
+    "eth_mxn",
+    "xrp_btc",
+    "xrp_mxn",
+    "eth_btc",
+    "bch_btc"
+  ],
+  "apis": {
+    "websockets": {
+      "address": "ws://ws.bitso.com/",
+      "channels": [
+        {
+          "name": "trades",
+          "responseDescription": {
+            "i": "id",
+            "a": "amount",
+            "r": "rate",
+            "v": 	"value",
+            "t": 	"transaction",
+            "mo": "makerOrderID",
+            "to": "takerOrderID"
+          }
+        }
+      ]
     }
-  ]
+  }
 }
