@@ -10,11 +10,15 @@
   ],
   "apis": {
     "websockets": {
-      "address": "ws://ws.bitso.com/",
-      "channels": [
-        {
-          "name": "trades",
-          "responseDescription": {
+      "address": "wss://ws.bitso.com/",
+      "subscription": {
+        "object": {
+          "action": "subscribe",
+          "book": "${books}",
+          "type": "${trades|diff-orders|orders}"
+        },
+        "trades": {
+          "response": {
             "i": "id",
             "a": "amount",
             "r": "rate",
@@ -22,9 +26,15 @@
             "t": 	"transaction",
             "mo": "makerOrderID",
             "to": "takerOrderID"
-          }
+          }  
+        },
+        "diff-orders": {
+
+        },
+        "orders": {
+
         }
-      ]
+      }
     }
   }
 }

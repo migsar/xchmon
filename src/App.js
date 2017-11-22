@@ -1,7 +1,7 @@
 const winston = require('winston');
 const chalk = require('chalk');
 const Context = require('./Context');
-const Provider = require('./Provider');
+const Provider = require('./Provider/Provider');
 
 const state = Symbol('state');
 
@@ -38,8 +38,19 @@ class App{
   }
 
   start() {
-    // todo: use logger
+    const providers = this[state].providers;
+
+    // todo: use logger with chalk
     console.log(chalk.blue('Xchmon started...'));
+
+    providers.forEach( provider => {
+      console.log(chalk.yellow(`Starting ${provider.name} provider.`));
+      // todo: use consumer instead of test function
+      provider.subscribe( tick => {
+        console.log(tick);
+      });
+      provider.start();
+    });
   }
 }
 
