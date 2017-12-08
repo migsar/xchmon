@@ -1,5 +1,6 @@
 const WebSocket = require('faye-websocket').Client;
 
+const Tick = require('./Tick');
 const strings = require('../Strings');
 const ERROR = strings.Consumer.ERROR;
 const state = Symbol('state');
@@ -135,7 +136,7 @@ class Provider {
         case 'trades':
           if (data.payload) {
             data.payload.forEach( tick => {
-              that.emit(new Tick(tick, tickOptions));
+              that.emit(new Tick(tick, data.book, tickOptions));
             });
           }
           break;
@@ -143,7 +144,6 @@ class Provider {
         default:
           break;
       }
-
     }
 
     const generator = function* () {
@@ -171,19 +171,6 @@ class Provider {
     };
 
     return generator();
-  }
-}
-
-class Tick {
-  constructor(data, options) {
-    this.timestamp = (new Date).valueOf();
-    this.assign(data, options.map);
-  }
-
-  assign(props, map) {
-    for(let prop in props){
-      this[map[prop]] = props[prop];
-    };
   }
 }
 
