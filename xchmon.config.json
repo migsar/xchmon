@@ -1,0 +1,19 @@
+{
+  "providers": [
+    {
+      "name": "bitso",
+      "books": [
+        "btc_mxn",
+        "eth_mxn",
+        "eth_btc"
+      ]
+    }
+  ],
+  "consumers": [
+
+  ],
+  "output": {
+    "mode": "console",
+    "palette": "default"
+  }
+}

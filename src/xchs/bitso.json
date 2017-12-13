@@ -23,10 +23,10 @@
             "a": "amount",
             "r": "rate",
             "v": 	"value",
-            "t": 	"transaction",
+            "t": 	"operation",
             "mo": "makerOrderID",
             "to": "takerOrderID"
-          }  
+          }
         },
         "diff-orders": {
 

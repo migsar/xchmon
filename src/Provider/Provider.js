@@ -6,7 +6,7 @@ const ERROR = strings.Consumer.ERROR;
 const state = Symbol('state');
 
 class Provider {
-  constructor(options, context){
+  constructor(descriptor, context){
     this[state] = {
       consumers: [],
       factory: null,
@@ -19,9 +19,10 @@ class Provider {
       this[state].logger = context.getVar('logger') || console;
     }
 
-    this[state].name = options.name || 'unknown';
-    this[state].apis = options.apis;
-    this[state].apiNames = this.getApiNames(options);
+    this[state].name = descriptor.name || 'unknown';
+    this[state].apis = descriptor.apis;
+    this[state].books = descriptor.books || null;
+    this[state].apiNames = this.getApiNames(descriptor);
     this.initAPI('websockets');
   }
 

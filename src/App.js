@@ -2,6 +2,8 @@ const winston = require('winston');
 const chalk = require('chalk');
 const Context = require('./Context');
 const Provider = require('./Provider/Provider');
+const Consumer = require('./Consumer/Consumer');
+const SQLConsumer = require('./Consumer/SQLConsumer');
 
 const state = Symbol('state');
 
@@ -33,8 +35,8 @@ class App{
     this[state].context = new Context;
   }
 
-  addProvider(providerOptions) {
-    this[state].providers.push(new Provider(providerOptions, this[state].context));
+  addProvider(providerDescriptor) {
+    this[state].providers.push(new Provider(providerDescriptor, this[state].context));
   }
 
   start() {
@@ -45,10 +47,8 @@ class App{
 
     providers.forEach( provider => {
       console.log(chalk.yellow(`Starting ${provider.name} provider.`));
-      // todo: use consumer instead of test function
-      provider.subscribe( tick => {
-        console.log(tick);
-      });
+      const consumer = new SQLConsumer();
+      provider.subscribe( consumer.middleware.bind(consumer) );
       provider.start();
     });
   }
